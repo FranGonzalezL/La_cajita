@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://Container.gd" type="Script" id=1]
 [ext_resource path="res://Body.gd" type="Script" id=2]
@@ -20,13 +20,18 @@ extents = Vector2( 401.836, 16.8508 )
 custom_solver_bias = 0.0
 points = Vector2Array( 76.4543, -57.6177, 68.6981, 42.1053, -48.7534, 39.8892, -50.9695, -56.5097 )
 
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 62.0894, -14.3161, 33.2805, 41.0855, -48.7534, 39.8892, -15.4729, -16.5322 )
+
 [node name="Container" type="Node"]
 
 script/script = ExtResource( 1 )
 
 [node name="Tipito" type="KinematicBody2D" parent="."]
 
-transform/pos = Vector2( 424.377, 325.446 )
+transform/pos = Vector2( 200, 400 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 3.0684, 0, 0, 3.0684, 0, 0 )
@@ -52,7 +57,7 @@ _update_shape_index = 0
 transform/pos = Vector2( 417.729, 488.643 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 60.9418, 0 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 60.9418, 1 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -77,14 +82,14 @@ invert/border = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Piso"]
 
-transform/pos = Vector2( 60.9418, 0 )
+transform/pos = Vector2( 60.9418, 1 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
 [node name="Cajita" type="RigidBody2D" parent="."]
 
-transform/pos = Vector2( 660.762, 401.108 )
+transform/pos = Vector2( 660.762, 301.108 )
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 2.37562, 7.029 )
@@ -95,7 +100,7 @@ mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.0
-gravity_scale = 1.0
+gravity_scale = 10.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 0
@@ -121,6 +126,55 @@ trigger = false
 polygon = Vector2Array( -50, -50, -48.6087, 47.2901, 73.275, 50.6142, 79.9232, -49.1088 )
 uv = Vector2Array(  )
 color = Color( 0.757813, 0.0680847, 0.0680847, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Cajita1" type="RigidBody2D" parent="."]
+
+transform/pos = Vector2( 355.646, 404.778 )
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 2.37562, 7.029 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 0
+mass = 0.102041
+friction = 1.0
+bounce = 0.0
+gravity_scale = 10.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cajita1"]
+
+transform/pos = Vector2( 2.37562, 7.029 )
+build_mode = 0
+polygon = Vector2Array( -15.4729, -16.5322, -48.7534, 39.8892, 33.2805, 41.0855, 62.0894, -14.3161 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Cajita1"]
+
+transform/pos = Vector2( 1.10803, 0 )
+polygon = Vector2Array( -11.9893, -9.5032, -46.3383, 44.7904, 35.6562, 50.3306, 61.1409, -5.07108 )
+uv = Vector2Array(  )
+color = Color( 0.0680847, 0.159689, 0.757813, 1 )
 vertex_colors = ColorArray(  )
 offset = Vector2( 0, 0 )
 texture/texture = null

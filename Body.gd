@@ -33,19 +33,21 @@ func update(delta):
 	var motion = velocity
 	motion = move(motion)
 
+	# Floor detection
 	if (is_colliding()):
 		state = "grounded"
 	
+	# Collision resolution
 	if (is_colliding()):
+		# Push rigid object
 		var collider = get_collider()
 		if (collider extends RigidBody2D):
-			var direction = -get_collision_normal()
-			var norm = motion.dot(direction)
-			get_parent().get_node("Cajita").applied_velocity = direction * norm
-			#collider.apply_impulse(Vector2(0, 0), direction * norm * 10)
-	
-	# Relocate
-	if (is_colliding()):
+			var impulse_direction = -get_collision_normal()
+			var impulse_norm = motion.dot(impulse_direction)
+			var relative_collision_pos = get_collision_pos() - collider.get_pos()
+			collider.apply_impulse(relative_collision_pos,
+			                       impulse_direction * impulse_norm)
+		# Rellocate
 		var n = get_collision_normal()
 		motion = n.slide(motion)
 		velocity = n.slide(velocity)
